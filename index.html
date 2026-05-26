@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Selamat Ulang Tahun - Video Spesial YouTube</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* ========== OVERLAY PENGHALANG FULL PAGE ========== */
+        .overlay-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b3c 100%);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            cursor: pointer;
+        }
+
+        .overlay-content {
+            text-align: center;
+            max-width: 90%;
+            animation: floatGlow 2s infinite ease-in-out;
+        }
+
+        .overlay-content img {
+            max-width: 85%;
+            max-height: 60vh;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 0 5px rgba(255, 215, 0, 0.3), 0 0 0 12px rgba(118, 75, 162, 0.4);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .overlay-content img:hover {
+            transform: scale(1.02);
+        }
+
+        .overlay-text {
+            margin-top: 35px;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+
+        .overlay-sub {
+            color: #f0c4ff;
+            margin-top: 15px;
+            font-size: 1.1rem;
+            animation: pulse 1.5s infinite;
+        }
+
+        .click-hint {
+            margin-top: 25px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 1px solid rgba(255,255,200,0.6);
+            transition: all 0.3s;
+        }
+
+        .click-hint:hover {
+            background: rgba(255,215,0,0.5);
+            transform: scale(1.05);
+        }
+
+        @keyframes floatGlow {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Konten utama - akan muncul setelah overlay hilang */
+        .main-content {
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.6s ease;
+        }
+
+        .main-content.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ========== STYLE NAVIGASI & KONTEN UTAMA ========== */
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        #tombol-musik {
+            padding: 8px 16px;
+            background: #320347;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        #tombol-musik:hover {
+            background: #4a0a5e;
+            transform: scale(1.05);
+        }
+
+        .page {
+            min-height: 100vh;
+            padding: 100px 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        #kue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .cake-container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .cake-container h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .cake {
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .candle {
+            width: 15px;
+            height: 60px;
+            background: #f1c40f;
+            margin: 0 auto 5px;
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            animation: flicker 0.5s infinite alternate;
+        }
+
+        .candle::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #ff8c00;
+            border-radius: 50%;
+            top: -15px;
+            left: -2.5px;
+            box-shadow: 0 0 20px #ffaa00;
+        }
+
+        .layer {
+            width: 200px;
+            height: 40px;
+            background: #e67e22;
+            border-radius: 20px;
+            margin: 0 auto;
+            box-shadow: 0 5px 0 #b45f1b;
+        }
+
+        .layer.middle {
+            width: 240px;
+            height: 50px;
+            background: #d35400;
+        }
+
+        .layer.bottom {
+            width: 280px;
+            height: 60px;
+            background: #ba6b2b;
+        }
+
+        .plate {
+            width: 320px;
+            height: 15px;
+            background: #bdc3c7;
+            border-radius: 10px;
+            margin: 10px auto 0;
+            box-shadow: 0 5px 0 #95a5a6;
+        }
+
+        .glow {
+            width: 300px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(88, 4, 99, 0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes flicker {
+            from { opacity: 1; transform: scaleY(1); }
+            to { opacity: 0.9; transform: scaleY(1.05); }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.2; }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.2; }
+        }
+
+        #galeri {
+            background: #cfa3e0;
+        }
+
+        .gallery-container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .gallery-container h1 {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .photo-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+        }
+
+        .photo-caption {
+            padding: 20px;
+        }
+
+        .photo-caption h3 {
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+
+        .photo-caption p {
+            color: #7f8c8d;
+        }
+
+        #ucapan {
+            background: linear-gradient(135deg, #7906a7 0%, #fad0c4 100%);
+            color: #2d3436;
+        }
+
+        .thanks-container {
+            max-width: 1100px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 50px 30px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .thanks-container h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .thanks-message {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            color: #fff;
+        }
+
+        .thanks-message p {
+            margin-bottom: 15px;
+        }
+
+        .signature {
+            font-size: 1.5em;
+            font-style: italic;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        .videos-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0 20px;
+        }
+
+        .video-item {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+            padding: 15px;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .video-item iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+
+        .video-label {
+            margin-top: 12px;
+            font-size: 0.95em;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.5);
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .video-note {
+            font-size: 0.8em;
+            color: #fff9c4;
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        .heart {
+            display: inline-block;
+            color: #ff4757;
+            font-size: 2em;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* Badge kecil opsional */
+        .familytree-badge {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(255,255,240,0.85);
+            backdrop-filter: blur(4px);
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            z-index: 999;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .familytree-badge:hover {
+            transform: scale(1.07);
+        }
+        .familytree-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .nav-links {
+                gap: 0.5rem;
+            }
+            .nav-links a {
+                padding: 0.3rem 0.8rem;
+                font-size: 0.9em;
+            }
+            .cake-container h1,
+            .gallery-container h1,
+            .thanks-container h1 {
+                font-size: 2em;
+            }
+            .videos-wrapper {
+                flex-direction: column;
+            }
+            .overlay-text {
+                font-size: 1.2rem;
+            }
+            .overlay-content img {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HALAMAN PENGHALANG (OVERLAY) FULL PAGE dengan gambar Screenshot 2026-03-07 002635.png -->
+    <div id="overlayPage" class="overlay-page">
+        <div class="overlay-content">
+            <img src="Screenshot 2026-03-07 002635.png" alt="Familytree Velture - Pembuka Pintu" id="gateImage">
+            <div class="overlay-text">🌳 SELAMAT DATANG YOWI 🍃</div>
+            <div class="overlay-sub">✦Slamat berulang tahun untuk yg kesekian kalinnya✦</div>
+            <div class="overlay-sub">✦Dah tambah tua lagi aja yow hehe✦</div>
+            <div class="click-hint">✨ kelik aja entar masuk sendiri ✨</div>
+        </div>
+    </div>
+
+    <!-- KONTEN UTAMA (yang tadinya terhalang) -->
+    <div class="main-content" id="mainContent">
+        <!-- Navigasi -->
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a href="#kue">🎉 Kue</a></li>
+                <li><a href="#galeri">📸 Galeri</a></li>
+                <li><a href="#ucapan">💌 Ucapan & Video</a></li>
+            </ul>
+            <audio id="lagu" loop preload="auto">
+                <source src="Banda Neira - Yang patah tumbuh, yang hilang berganti ( slowed reverb ).mp3" type="audio/mpeg">
+            </audio>
+            <button id="tombol-musik">🔇 pencet aja, dolarkuning awas</button>
+        </nav>
+
+        <!-- Halaman 1: Kue -->
+        <section id="kue" class="page">
+            <div class="cake-container">
+                <h1>🎉 HAPPY BIRTHDAY! 🎉</h1>
+                <div class="cake">
+                    <div class="candle"></div>
+                    <div class="layer"></div>
+                    <div class="layer middle"></div>
+                    <div class="layer bottom"></div>
+                    <div class="plate"></div>
+                </div>
+                <div class="glow"></div>
+                <p style="font-size: 1.2em; margin-top: 20px;">Tiup Lilinnya Yow, (walaupun ga bisa di tiup si wkwkkw)</p>
+                <p style="font-size: 1.1em;">Semoga hari hari kita akan menjadi lebih baik dan selalu di berikan kebahagiaan di setiap waktu ✨</p>
+            </div>
+        </section>
+
+        <!-- Halaman 2: Galeri Foto -->
+        <section id="galeri" class="page">
+            <div class="gallery-container">
+                <h1>📷 Kelakuan Si Sosok Ungu 📷</h1>
+                <div class="gallery-grid">
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-07 000910.png" alt="Masak" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🍳 Masak</text></svg>'"><div class="photo-caption"><h3>Masak</h3><strong>katanya yang buatnya itu kanibal</strong><strong>MENGERIKAN JIRRRR</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-07 002405.png" alt="3D Model" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🎨 3D</text></svg>'"><div class="photo-caption"><h3>3D Model</h3><strong>Beliau di gadang-gadang jadi anak tantrum</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="34.png" alt="TheoTown" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🏙️ TheoTown</text></svg>'"><div class="photo-caption"><h3>TheoTown</h3><strong>POV warga yang di gusur</strong><p><strong>"gusurkan presidennn!!"</strong></p></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-07 004254.png" alt="Karakter 2D" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>✨ Karakter</text></svg>'"><div class="photo-caption"><h3>KARAKTER 2D</h3><strong>Yang menjadikan aku pertama kali melihat fyol</strong><strong>Dan aku sangat bersyukur telah bertemu dengannya</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-07 005221.png" alt="NOW" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>💕 NOW</text></svg>'"><div class="photo-caption"><h3>NOW</h3><strong>Dan sekarang aku atau kita bersamanya</strong><p>aga tengil dikit liat dari mukannya</p></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-07 003718.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>👨‍🦱 Momen</text></svg>'"><div class="photo-caption"><h3>Momen si Abang ANGK</h3><strong>Menolak lupa, wel wel wel</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="image_2026-03-17_220226561.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>👩 Mama</text></svg>'"><div class="photo-caption"><h3>MAMA MUDA</h3><strong>adopsi aku mah wkwkwk</strong><p>tangan barkod jirr</p></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-17 222921.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🔥 Tragis</text></svg>'"><div class="photo-caption"><h3>MOMEN TRAGIS</h3><strong>kebakaran jir</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-20 165756.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🎨 Sepuh</text></svg>'"><div class="photo-caption"><h3>SEPUH SPUH KAMAR</h3><strong>KATANYA "aku pemula bang"</strong><p>padahal sepuh banget tuh</p></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="WhatsApp Image 2026-03-18 at 11.27.40 (2).jpeg" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>😵 Tumru</text></svg>'"><div class="photo-caption"><h3>TUMRU</h3><strong>malah tepar cik</strong><p>di kasi lalet enak tuh mulut</p></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-26 234254.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>...</text></svg>'"><div class="photo-caption"><h3>............</h3><strong>biasa itu lah :I</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-03-26 234504.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23a8edea\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>👤 Admin</text></svg>'"><div class="photo-caption"><h3>GWEH</h3><strong>admin</strong></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-04-18 083055.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🌀 YOLI</text></svg>'"><div class="photo-caption"><h3>KEGABUTAN</h3><strong>YOLI</strong><p>bagus btw 8/10</p></div></div>
+                    <div class="photo-card"><img class="photo-placeholder" src="Screenshot 2026-05-25 232613.png" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'100%\' height=\'100%\' viewBox=\'0 0 100 100\'><rect width=\'100\' height=\'100\' fill=\'%23fed6e3\'/><text x=\'10\' y=\'50\' font-size=\'14\' fill=\'%23333\'>🌀 YOLI</text></svg>'"><div class="photo-caption"><h3>ML</h3><strong>oalah ke belakang lo yah</strong><p>satu dari sekian banyaknya ke reflekkan yoli</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Halaman 3: Ucapan + Video -->
+        <section id="ucapan" class="page">
+            <div class="thanks-container">
+                <h1>🎉 Terima Kasih, Selalu 🎉</h1>
+                <div class="thanks-message">
+                    <p>Terima kasih telah menemani kita selama ini</p>
+                    <p>Terima kasih untuk setiap hiburan yang kau hadirkan</p>
+                    <p>Terimakasi untuk waktu yg kau luangkan untuk kita</p>
+                    <p>Semoga kebaikanmu akan di sandingkan dengan kebaikan lain juga di semasa hidupmu.</p>
+                    <p>Terima kasih telah menemaniku, menghiburku, dan sempat memberi saran untukku, sampai aku mendapatkan kisahku sendiri bersamanya. Aku sangat bahagia telah bertemu dengan kalian, tidak ada kata menyesal untuk melakukannya. Angk, admin, dan yang lain terima kasih sejujurnya aku ingin berterimakasi denagn ucapanku sendiri tapi itu hanya mimpi indaku di malam hari</p>
+                    <h3>~ shimui ~</h3>
+                </div>
+                <div class="heart">🎉</div>
+                <div class="signature"><p>Untuk Yang Berulang Tahun</p></div>
+                <p>kelik aja aku pos di youtube hostingan sedikit yg ngedukung video MBgede</p>
+                <div class="videos-wrapper">
+                    <div class="video-item">
+                        <iframe width="745" height="745" src="https://www.youtube.com/embed/5cGW3clBP5c" title="Video 1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <div class="video-label">🎬 Kehendak Diri - Perkataanku di Tengah Video</div>
+                    </div>
+                    <div class="video-item">
+                        <iframe width="908" height="681" src="https://www.youtube.com/embed/1tF2q4ssrDY" title="Video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <div class="video-label">🎥 he fun aja</div>
+                    </div>
+                </div>
+                <p style="margin-top: 30px; color: #1a0a28;">Sampai jumpah di Tahun selalnjutnya, semoga kita sehat selalu dan aku masi hidup! 🎉<br>Dariku shimui, salam hangat untuk semuanya!</p>
+            </div>
+        </section>
+
+        <!-- Badge kecil (opsional) -->
+        <div class="familytree-badge" id="miniBadge">
+            <img src="Screenshot 2026-03-07 002635.png" alt="Familytree Velture" onerror="this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%22100%22%20viewBox%3D%220%200%20100%20100%22%3E%3Ccircle%20cx%3D%2250%22%20cy%3D%2250%22%20r%3D%2245%22%20fill%3D%22%23764ba2%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2265%22%20text-anchor%3D%22middle%22%20fill%3D%22white%22%20font-size%3D%2214%22%3EFV%3C%2Ftext%3E%3C%2Fsvg%3E'">
+        </div>
+    </div>
+
+    <script>
+        // AMBIL ELEMEN
+        const overlay = document.getElementById('overlayPage');
+        const mainContent = document.getElementById('mainContent');
+        
+        // FUNGSI UNTUK MENGHILANGKAN OVERLAY (PENGHALANG) DAN MENAMPILKAN KONTEN UTAMA
+        function removeOverlay() {
+            if (!overlay) return;
+            overlay.style.opacity = '0';
+            overlay.style.visibility = 'hidden';
+            // Setelah transisi selesai, tampilkan main content
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                mainContent.classList.add('show');
+                // Optional: trigger audio sedikit jika user mau interaksi duluan nanti
+                console.log('Selamat datang di halaman utama! 🎉');
+            }, 800);
+        }
+        
+        // Event untuk menghilangkan penghalang: klik gambar, klik area overlay, atau sentuh
+        if (overlay) {
+            overlay.addEventListener('click', function(e) {
+                // Agar tidak bentrok dengan anak elemen, tetap panggil remove
+                removeOverlay();
+            });
+            // Optional: jika ingin efek khusus saat gambar diklik, sudah termasuk
+            const gateImg = document.getElementById('gateImage');
+            if (gateImg) {
+                gateImg.addEventListener('click', function(e) {
+                    e.stopPropagation(); // tetap panggil remove, tidak masalah
+                });
+            }
+        }
+        
+        // ========== SMOOTH SCROLL, MUSIK, DST (seperti sebelumnya) ==========
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+        
+        const audio = document.getElementById('lagu');
+        const tombol = document.getElementById('tombol-musik');
+        if (audio) {
+            audio.load();
+            audio.volume = 0.6;
+        }
+        if (tombol) {
+            tombol.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play().then(() => {
+                        tombol.textContent = '🔊 Musik Menyala';
+                        tombol.style.background = '#4CAF50';
+                    }).catch(err => {
+                        alert('Gagal memutar musik. Pastikan file audio ada.');
+                    });
+                } else {
+                    audio.pause();
+                    tombol.textContent = '🔇 pencet aja, dolarkuning awas';
+                    tombol.style.background = '#320347';
+                }
+            });
+        }
+        
+        // Animasi galeri
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.photo-card').forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            observer.observe(card);
+        });
+        
+        // Efek lilin
+        const candle = document.querySelector('.candle');
+        if (candle) {
+            candle.addEventListener('click', () => {
+                const burst = document.createElement('div');
+                burst.textContent = '🎂 SELAMAT ULANG TAHUN! 🎂';
+                burst.style.position = 'fixed';
+                burst.style.top = '50%';
+                burst.style.left = '50%';
+                burst.style.transform = 'translate(-50%, -50%)';
+                burst.style.background = 'rgba(0,0,0,0.85)';
+                burst.style.color = '#FFD700';
+                burst.style.padding = '20px 40px';
+                burst.style.borderRadius = '50px';
+                burst.style.fontSize = '1.5rem';
+                burst.style.fontWeight = 'bold';
+                burst.style.zIndex = '10001';
+                burst.style.whiteSpace = 'nowrap';
+                document.body.appendChild(burst);
+                setTimeout(() => {
+                    burst.style.opacity = '0';
+                    burst.style.transition = 'opacity 0.5s';
+                    setTimeout(() => burst.remove(), 500);
+                }, 2000);
+            });
+        }
+        
+        const mini = document.getElementById('miniBadge');
+        if (mini) {
+            mini.addEventListener('click', () => alert('🌳 Familytree | Velture — Terimakasi telah menemani kita, semoga aku masi hidup untuk tahun depan 🌟'));
+        }
+    </script>
+</body>
+</html>
